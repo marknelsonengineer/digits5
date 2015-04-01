@@ -3,9 +3,10 @@
 # ~~~~
 
 # Home page
-GET        /                    controllers.Application.home()
-GET        /about               controllers.Application.about()
-GET        /newContact          controllers.Application.newContact()
+GET        /                    controllers.Application.getHome()
+GET        /about               controllers.Application.getAbout()
+GET        /newContact          controllers.Application.getNewContact()
+POST       /newContact          controllers.Application.postNewContact()
 
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file        controllers.Assets.at(path="/public", file)

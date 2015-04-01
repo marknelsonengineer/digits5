@@ -58,7 +58,7 @@ public class IntegrationTest {
     running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT, new F.Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
         browser.goTo("http://localhost:" + TEST_PORT + "/about");
-        assertThat(browser.pageSource()).contains("About");
+        assertThat(browser.pageSource()).contains("Digits was written by:");
       }
     });
   }

@@ -1,7 +1,10 @@
 package controllers;
 
+import play.Logger;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.formdata.ContactFormData;
 import views.html.About;
 import views.html.Home;
 import views.html.NewContact;
@@ -24,7 +27,7 @@ public class Application extends Controller {
    *
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
-  public static Result home() {
+  public static Result getHome() {
     return ok(Home.render(APPLICATION_NAME, "Home"));
   }
 
@@ -33,7 +36,7 @@ public class Application extends Controller {
    *
    * @return An HTTP OK message along with the HTML content for the About page.
    */
-  public static Result about() {
+  public static Result getAbout() {
     return ok(About.render(APPLICATION_NAME, "About"));
   }
 
@@ -42,7 +45,27 @@ public class Application extends Controller {
    *
    * @return An HTTP OK message along with the HTML content for the New Contact page.
    */
-  public static Result newContact() {
-    return ok(NewContact.render(APPLICATION_NAME, "New Contact"));
+  public static Result getNewContact() {
+    Form<ContactFormData> contactForm = Form.form(ContactFormData.class);
+
+    return ok(NewContact.render(APPLICATION_NAME, "New Contact", contactForm));
+  }
+
+
+  /**
+   * Process an HTTP Post from the New Contact page.
+   *
+   * @return An HTTP OK message along with the HTML content for the New Contact page.
+   */
+  public static Result postNewContact() {
+    Form<ContactFormData> contactForm = Form.form(ContactFormData.class).bindFromRequest();
+    ContactFormData contactFormData = contactForm.get();
+
+    Logger.debug("Contact Form Data");
+    Logger.debug("  firstName = [" + contactFormData.firstName + "]");
+    Logger.debug("  lastName = [" + contactFormData.lastName + "]");
+    Logger.debug("  phone = [" + contactFormData.phone + "]");
+
+    return ok(NewContact.render(APPLICATION_NAME, "New Contact", contactForm));
   }
 }
