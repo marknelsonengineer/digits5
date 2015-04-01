@@ -1,5 +1,6 @@
 package views.formdata;
 
+import models.Contact;
 import play.data.validation.ValidationError;
 
 import java.util.ArrayList;
@@ -12,18 +13,30 @@ import java.util.List;
  * @see http://www.playframework.com
  */
 public class ContactFormData {
-  /** The contact's first name. */
-  public String firstName = "";
-
-  /** The contact's last name. */
-  public String lastName = "";
-
-  /** The contact's phone number. */
-  public String phone = "";
-
-  /** The minimum number of characters for a valid phone number. */
+  /**
+   * The minimum number of characters for a valid phone number.
+   */
   public static final int MINIMUM_PHONE_NUMBER_LENGTH = 12;
 
+  /**
+   * The contact's id number.
+   */
+  public long id = 0;
+
+  /**
+   * The contact's first name.
+   */
+  public String firstName = "";
+
+  /**
+   * The contact's last name.
+   */
+  public String lastName = "";
+
+  /**
+   * The contact's phone number.
+   */
+  public String phone = "";
 
   /**
    * The Play framework requires an empty constructor.
@@ -33,10 +46,22 @@ public class ContactFormData {
   }
 
   /**
+   * Populate a ContactFormData object from a Contact object from the model.
+   *
+   * @param contact A contact object from the model.
+   */
+  public ContactFormData(Contact contact) {
+    this.id = contact.getId();
+    this.firstName = contact.getFirstName();
+    this.lastName = contact.getLastName();
+    this.phone = contact.getPhone();
+  }
+
+  /**
    * Perform form (entry) validation on the HTML form before accepting the data into the application.
    *
    * @return If there are no errors, then return null.  If there are errors, return an ArrayLIst with
-   *         ValidationError objects.
+   * ValidationError objects.
    */
   public List<ValidationError> validate() {
     List<ValidationError> errors = new ArrayList<>();

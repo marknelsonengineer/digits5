@@ -7,6 +7,7 @@ package models;
  * @see http://www.playframework.com
  */
 public class Contact {
+  private long id;
   private String firstName;
   private String lastName;
   private String phone;
@@ -14,14 +15,25 @@ public class Contact {
   /**
    * Create a new contact from parameterized values.
    *
+   * @param id        A synthetic, unique ID number for the contact.
    * @param firstName The first name.
    * @param lastName  The last name.
-   * @param phone The phone number.
+   * @param phone     The phone number.
    */
-  public Contact(String firstName, String lastName, String phone) {
+  public Contact(long id, String firstName, String lastName, String phone) {
+    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.phone = phone;
+  }
+
+  /**
+   * Get the contact's id number.
+   *
+   * @return The contact's id number.
+   */
+  public long getId() {
+    return id;
   }
 
   /**
