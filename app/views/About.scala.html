@@ -1,0 +1,24 @@
+@*
+* The application's about page.
+*
+* @author Mark Nelson
+* @see http://www.playframework.com
+*@
+@(title: String, pageName: String)
+
+@Main("Digits") {
+
+  @MainNavbar(title = title, pageName = pageName)
+
+  <h1>About</h1>
+
+  <p>
+    @title was written by: <br>
+    Mark Nelson <br>
+    ...in the Spring of 2015... <br>
+    for ICS 613 - Advanced Software Engineering <br>
+    taught by <br>
+    Dr. Philip Johnson <br>
+  </p>
+
+}
