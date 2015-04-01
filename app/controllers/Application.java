@@ -63,6 +63,17 @@ public class Application extends Controller {
     return ok(NewContact.render(APPLICATION_NAME, "New Contact", contactForm));
   }
 
+  /**
+   * Delete a contact and render the Home page.
+   *
+   * @param id The contact ID to delete.
+   * @return An HTTP OK message along with the HTML content for the Home page.
+   */
+  public static Result deleteContact(long id) {
+    ContactsDb.deleteContact(id);
+
+    return ok(Home.render(APPLICATION_NAME, "Home", ContactsDb.getContacts()));
+  }
 
   /**
    * Process an HTTP Post from the New Contact page.

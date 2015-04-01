@@ -63,12 +63,25 @@ public class ContactsDb {
    * @param id The ID of the contact to get.
    * @return A contact from the database.
    */
-  public static Contact getContact(Long id) {
+  public static Contact getContact(long id) {
     if (!contacts.containsKey(id)) {
       throw new ArrayIndexOutOfBoundsException("The contact id [" + id + "] does not exist in the database.");
     }
 
     return contacts.get(id);
+  }
+
+  /**
+   * Delete a cotact from the database.
+   *
+   * @param id A contact ID from the database to delete.
+   */
+  public static void deleteContact(long id) {
+    if (!contacts.containsKey(id)) {
+      throw new ArrayIndexOutOfBoundsException("The contact id [" + id + "] does not exist in the database.");
+    }
+
+    contacts.remove(id);
   }
 
 }
