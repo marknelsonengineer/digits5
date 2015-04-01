@@ -12,3 +12,18 @@ img {
   margin-left: auto;
   margin-right: auto
 }
+
+
+.about {
+  line-height: 300%;
+}
+
+.author {
+  font-family: Rock Salt;
+  font-size: 150%
+}
+
+.instructor {
+  font-family: Great Vibes;
+  font-size: 200%;
+}
