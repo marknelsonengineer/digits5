@@ -59,6 +59,12 @@ public class Application extends Controller {
    */
   public static Result postNewContact() {
     Form<ContactFormData> contactForm = Form.form(ContactFormData.class).bindFromRequest();
+
+    if (contactForm.hasErrors()) {
+      Logger.error("Error in newContact page.");
+      return badRequest(NewContact.render(APPLICATION_NAME, "New Contact", contactForm));
+    }
+
     ContactFormData contactFormData = contactForm.get();
 
     Logger.debug("Contact Form Data");
