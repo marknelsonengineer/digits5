@@ -1,19 +1,26 @@
-
 .page-content {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 img {
   display: block;
 }
 
+img.topBanner {
+  height: 60px;
+}
+
 .topBanner {
-  padding-left: 0px;
+  text-align: center;
+  display: inline;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .about {
   line-height: 300%;
+  text-align: center;
 }
 
 .author {
@@ -25,3 +32,4 @@ img {
   font-family: Great Vibes;
   font-size: 200%;
 }
+
