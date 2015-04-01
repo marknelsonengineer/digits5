@@ -1,18 +1,16 @@
-body {
-  padding-top: 50px;  /* Move body of page below navbar. */
-}
 
 .page-content {
-  padding: 10px;
-  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 img {
   display: block;
-  margin-left: auto;
-  margin-right: auto
 }
 
+.topBanner {
+  padding-left: 0px;
+}
 
 .about {
   line-height: 300%;

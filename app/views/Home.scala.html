@@ -6,13 +6,26 @@
 *@
 @(title: String, pageName: String)
 
-@Main("Digits") {
+@Main(title = title) {
 
   @MainNavbar(title = title, pageName = pageName)
 
-  <h1>Home Page</h1>
+  <h1>Current Contacts</h1>
 
-  <p>This is a template project with a simple responsive navbar and image.</p>
+  <table class="table table-bordered table-responsive table-striped">
+    <tr>
+      <th>First</th> <th>Last</th> <th>Phone</th>
+    </tr>
+    <tr>
+      <td>Joe</td> <td>Schmoe</td> <td>+1 808 555 1212</td>
+    </tr>
+    <tr>
+      <td>Sam</td> <td>Nelson</td> <td>+1 222-222-2222</td>
+    </tr>
+    <tr>
+      <td>Mark</td> <td>Nelson</td> <td>+1 333 333 3333</td>
+    </tr>
+  </table>
 
 }
 

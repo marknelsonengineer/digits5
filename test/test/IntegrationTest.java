@@ -29,10 +29,23 @@ public class IntegrationTest {
     running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT, new F.Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
         browser.goTo("http://localhost:" + TEST_PORT);
-        assertThat(browser.pageSource()).contains("Home Page");
+        assertThat(browser.pageSource()).contains("Current Contacts");
 
         browser.goTo("http://localhost:" + TEST_PORT + "/");
-        assertThat(browser.pageSource()).contains("Home Page");
+        assertThat(browser.pageSource()).contains("Current Contacts");
+      }
+    });
+  }
+
+  /**
+   * Utilize a test browser to exercise the New Contact page.
+   */
+  @Test
+  public void testNewContactPage() {
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT, new F.Callback<TestBrowser>() {
+      public void invoke(TestBrowser browser) {
+        browser.goTo("http://localhost:" + TEST_PORT + "/newContact");
+        assertThat(browser.pageSource()).contains("New Contact");
       }
     });
   }

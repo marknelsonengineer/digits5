@@ -4,6 +4,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.About;
 import views.html.Home;
+import views.html.NewContact;
 
 /**
  * The application's MVC Controller class.
@@ -36,4 +37,12 @@ public class Application extends Controller {
     return ok(About.render(APPLICATION_NAME, "About"));
   }
 
+  /**
+   * Render the New Contact page.
+   *
+   * @return An HTTP OK message along with the HTML content for the New Contact page.
+   */
+  public static Result newContact() {
+    return ok(NewContact.render(APPLICATION_NAME, "New Contact"));
+  }
 }

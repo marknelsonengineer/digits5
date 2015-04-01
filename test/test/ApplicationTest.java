@@ -29,6 +29,6 @@ public class ApplicationTest {
     public void renderHomePage() {
         Content html = views.html.Home.render("Digits", "Home");
         assertThat(contentType(html)).isEqualTo("text/html");
-        assertThat(contentAsString(html)).contains("Home Page");
+        assertThat(contentAsString(html)).contains("Current Contacts");
     }
 }
