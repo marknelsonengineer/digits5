@@ -11,14 +11,14 @@
           <!--  Display three horizontal lines when navbar collapsed. -->
         <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="@routes.Application.home()">@title</a>
+      <a class="navbar-brand" href="@routes.Application.getHome()">@title</a>
     </div>
 
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li @if(pageName == "Home") {class="active"}><a href="@routes.Application.home()">Home</a></li>
-        <li @if(pageName == "New Contact") {class="active"}><a href="@routes.Application.newContact()">New Contact</a></li>
-        <li @if(pageName == "About") {class="active"}><a href="@routes.Application.about()">About</a></li>
+        <li @if(pageName == "Home") {class="active"}><a href="@routes.Application.getHome()">Home</a></li>
+        <li @if(pageName == "New Contact") {class="active"}><a href="@routes.Application.getNewContact()">New Contact</a></li>
+        <li @if(pageName == "About") {class="active"}><a href="@routes.Application.getAbout()">About</a></li>
       </ul>
     </div>
 
