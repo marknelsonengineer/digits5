@@ -8,10 +8,11 @@ import views.formdata.ContactFormData;
  * The Global object for the Digits web application.
  */
 public class Global extends GlobalSettings {
+
   @Override
   public void onStart(Application application) {
     super.onStart(application);
-    Logger.info("Digits has started");
+    Logger.info(controllers.Application.APPLICATION_NAME + " has started");
 
     ContactFormData cfd1 = new ContactFormData();
     cfd1.firstName = "Sam";
