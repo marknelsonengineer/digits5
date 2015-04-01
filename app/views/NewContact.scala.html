@@ -6,7 +6,7 @@
 *@
 @(title: String, pageName: String, contact: Form[views.formdata.ContactFormData], phoneType: Map[String, Boolean])
 
-@import bootstrap3.{select, text}
+@import bootstrap3.{select, text, phone}
 @import helper.form
 
 @Main(title = title) {
@@ -32,13 +32,11 @@
         placeholder = "Last",
         help = "")
 
-      @text(field = contact("phone"),
-        label = "Phone",
-        placeholder = "Phone",
-        help = "")
-
-      @select(field = contact("phoneType"),
-        label = "Phone Type",
+      @phone(phoneNumberField = contact("phone"),
+        phoneNumberLabel = "Phone",
+        phoneNumberPlaceholder = "Phone",
+        phoneNumberHelp = "",
+        phoneTypeField = contact("phoneType"),
         optionMap = phoneType,
         isMultiple = false,
         help = "")
