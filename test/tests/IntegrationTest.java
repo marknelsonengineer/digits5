@@ -56,10 +56,12 @@ public class IntegrationTest {
             String firstName = "Test First Name";
             String lastName = "Test Last Name";
             String phone = "Test Phone Number";
-            newContactPage.submitForm(firstName, lastName, phone);
+            String phoneType = "Mobile";
+            newContactPage.submitForm(firstName, lastName, phone, phoneType);
             assertThat(browser.pageSource()).contains(firstName);
             assertThat(browser.pageSource()).contains(lastName);
             assertThat(browser.pageSource()).contains(phone);
+            assertThat(browser.pageSource()).contains(phoneType);
           }
         });
   }

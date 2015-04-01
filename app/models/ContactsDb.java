@@ -31,7 +31,8 @@ public class ContactsDb {
           nextId++,
           contactFormData.firstName,
           contactFormData.lastName,
-          contactFormData.phone
+          contactFormData.phone,
+          contactFormData.phoneType
       );
     }
     else {
@@ -39,7 +40,8 @@ public class ContactsDb {
           contactFormData.id,
           contactFormData.firstName,
           contactFormData.lastName,
-          contactFormData.phone
+          contactFormData.phone,
+          contactFormData.phoneType
       );
     }
 
@@ -72,7 +74,7 @@ public class ContactsDb {
   }
 
   /**
-   * Delete a cotact from the database.
+   * Delete a contact from the database.
    *
    * @param id A contact ID from the database to delete.
    */

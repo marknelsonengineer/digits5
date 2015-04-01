@@ -4,9 +4,9 @@
 * @author Mark Nelson
 * @see http://www.playframework.com
 *@
-@(title: String, pageName: String, contact: Form[views.formdata.ContactFormData])
+@(title: String, pageName: String, contact: Form[views.formdata.ContactFormData], phoneType: Map[String, Boolean])
 
-@import bootstrap3.text
+@import bootstrap3.{select, text}
 @import helper.form
 
 @Main(title = title) {
@@ -35,6 +35,12 @@
       @text(field = contact("phone"),
         label = "Phone",
         placeholder = "Phone",
+        help = "")
+
+      @select(field = contact("phoneType"),
+        label = "Phone Type",
+        optionMap = phoneType,
+        isMultiple = false,
         help = "")
 
       <div class="form-group">

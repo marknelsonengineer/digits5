@@ -11,6 +11,7 @@ public class Contact {
   private String firstName;
   private String lastName;
   private String phone;
+  private String phoneType;
 
   /**
    * Create a new contact from parameterized values.
@@ -19,12 +20,14 @@ public class Contact {
    * @param firstName The first name.
    * @param lastName  The last name.
    * @param phone     The phone number.
+   * @param phoneType The type of phone.
    */
-  public Contact(long id, String firstName, String lastName, String phone) {
+  public Contact(long id, String firstName, String lastName, String phone, String phoneType) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.phone = phone;
+    this.phoneType = phoneType;
   }
 
   /**
@@ -61,5 +64,14 @@ public class Contact {
    */
   public String getPhone() {
     return phone;
+  }
+
+  /**
+   * Get the contact's type of phone.
+   *
+   * @return The contact's type of phone.
+   */
+  public String getPhoneType() {
+    return phoneType;
   }
 }

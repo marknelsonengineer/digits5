@@ -38,6 +38,12 @@ public class ContactFormData {
    */
   public String phone = "";
 
+
+  /**
+   * The contact's phone type.
+   */
+  public String phoneType = "";
+
   /**
    * The Play framework requires an empty constructor.
    */
@@ -55,6 +61,7 @@ public class ContactFormData {
     this.firstName = contact.getFirstName();
     this.lastName = contact.getLastName();
     this.phone = contact.getPhone();
+    this.phoneType = contact.getPhoneType();
   }
 
   /**
@@ -81,6 +88,10 @@ public class ContactFormData {
     if (phone == null || phone.length() < MINIMUM_PHONE_NUMBER_LENGTH) {
       errors.add(new ValidationError("phone", "The phone must be at least "
           + MINIMUM_PHONE_NUMBER_LENGTH + " characters long."));
+    }
+
+    if (phoneType == null || !PhoneType.isType(phoneType)) {
+      errors.add(new ValidationError("phoneType", "A phone type is required."));
     }
 
     return errors.isEmpty() ? null : errors;
