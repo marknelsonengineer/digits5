@@ -6,6 +6,9 @@ import views.html.index;
 
 /**
  * The application's MVC Controller class.
+ *
+ * @author Mark Nelson
+ * @see http://www.playframework.com
  */
 public class Application extends Controller {
 
