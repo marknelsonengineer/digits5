@@ -17,7 +17,9 @@ import static play.test.Helpers.testServer;
  */
 public class IntegrationTest {
 
-  /** The port number on which to run the tests. */
+  /**
+   * The port number on which to run the tests.
+   */
   private static final int TEST_PORT = 3333;
 
 

@@ -14,7 +14,7 @@
 
   <table class="table table-bordered table-responsive table-striped">
     <tr>
-      <th>First</th> <th>Last</th> <th>Phone</th>
+      <th>First</th> <th>Last</th> <th>Phone</th> <th>Edit</th>
     </tr>
 
     @for(contact <- contacts) {
@@ -22,6 +22,7 @@
         <td>@contact.getFirstName</td>
         <td>@contact.getLastName</td>
         <td>@contact.getPhone</td>
+        <td><a href="@routes.Application.getNewContact(contact.getId)">Edit</a></td>
       </tr>
     }
   </table>
