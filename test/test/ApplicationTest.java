@@ -1,5 +1,6 @@
 package test;
 
+import models.ContactsDb;
 import org.junit.Test;
 import play.twirl.api.Content;
 
@@ -27,7 +28,7 @@ public class ApplicationTest {
      */
     @Test
     public void renderHomePage() {
-        Content html = views.html.Home.render("Digits", "Home");
+        Content html = views.html.Home.render("Digits", "Home", ContactsDb.getContacts());
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("Current Contacts");
     }

@@ -1,5 +1,7 @@
 package controllers;
 
+import models.Contact;
+import models.ContactsDb;
 import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
@@ -28,7 +30,7 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
   public static Result getHome() {
-    return ok(Home.render(APPLICATION_NAME, "Home"));
+    return ok(Home.render(APPLICATION_NAME, "Home", ContactsDb.getContacts()));
   }
 
   /**
@@ -72,6 +74,13 @@ public class Application extends Controller {
     Logger.debug("  lastName = [" + contactFormData.lastName + "]");
     Logger.debug("  phone = [" + contactFormData.phone + "]");
 
-    return ok(NewContact.render(APPLICATION_NAME, "New Contact", contactForm));
+    Contact contact = ContactsDb.createContactFromForm(contactFormData);
+
+    Logger.debug("Contact Data");
+    Logger.debug("  firstName = [" + contact.getFirstName() + "]");
+    Logger.debug("  lastName = [" + contact.getLastName() + "]");
+    Logger.debug("  phone = [" + contact.getPhone() + "]");
+
+    return ok(Home.render(APPLICATION_NAME, "Home", ContactsDb.getContacts()));
   }
 }
