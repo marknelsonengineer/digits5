@@ -1,8 +1,10 @@
-package test;
+package tests;
 
 import org.junit.Test;
 import play.libs.F;
 import play.test.TestBrowser;
+import tests.pages.HomePage;
+import tests.pages.NewContactPage;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.HTMLUNIT;
@@ -22,6 +24,45 @@ public class IntegrationTest {
    */
   private static final int TEST_PORT = 3333;
 
+
+  /**
+   * Utilize a test browser and the Fluentlenium framework to exercise the Home page.
+   */
+  @Test
+  public void testGetHomePage() {
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+        new F.Callback<TestBrowser>() {
+          public void invoke(TestBrowser browser) {
+            browser.maximizeWindow();
+            HomePage homePage = new HomePage(browser.getDriver(), TEST_PORT);
+            browser.goTo(homePage);
+            homePage.isAt();
+          }
+        });
+  }
+
+  /**
+   * Utilize a test browser and exercise the Fluentlenium framework to exercise the NewContact page.
+   */
+  @Test
+  public void testNewContactPageSubmit() {
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+        new F.Callback<TestBrowser>() {
+          public void invoke(TestBrowser browser) {
+            browser.maximizeWindow();
+            NewContactPage newContactPage = new NewContactPage(browser.getDriver(), TEST_PORT);
+            browser.goTo(newContactPage);
+            newContactPage.isAt();
+            String firstName = "Test First Name";
+            String lastName = "Test Last Name";
+            String phone = "Test Phone Number";
+            newContactPage.submitForm(firstName, lastName, phone);
+            assertThat(browser.pageSource()).contains(firstName);
+            assertThat(browser.pageSource()).contains(lastName);
+            assertThat(browser.pageSource()).contains(phone);
+          }
+        });
+  }
 
   /**
    * Utilize a test browser to exercise the Home page.

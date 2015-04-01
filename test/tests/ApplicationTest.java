@@ -1,4 +1,4 @@
-package test;
+package tests;
 
 import models.ContactsDb;
 import org.junit.Test;
