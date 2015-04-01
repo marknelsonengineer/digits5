@@ -17,15 +17,35 @@ import static play.test.Helpers.testServer;
  */
 public class IntegrationTest {
 
+  /** The port number on which to run the tests. */
+  private static final int TEST_PORT = 3333;
+
+
   /**
-   * Utilize a test browser to exercise actual page interactions.
+   * Utilize a test browser to exercise the Home page.
    */
   @Test
-  public void test() {
-    running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new F.Callback<TestBrowser>() {
+  public void testHomePage() {
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT, new F.Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
-        browser.goTo("http://localhost:3333");
-        assertThat(browser.pageSource()).contains("Your new application is ready.");
+        browser.goTo("http://localhost:" + TEST_PORT);
+        assertThat(browser.pageSource()).contains("Home Page");
+
+        browser.goTo("http://localhost:" + TEST_PORT + "/");
+        assertThat(browser.pageSource()).contains("Home Page");
+      }
+    });
+  }
+
+  /**
+   * Utilize a test browser to exercise the About page.
+   */
+  @Test
+  public void testAboutPage() {
+    running(testServer(TEST_PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT, new F.Callback<TestBrowser>() {
+      public void invoke(TestBrowser browser) {
+        browser.goTo("http://localhost:" + TEST_PORT + "/about");
+        assertThat(browser.pageSource()).contains("About");
       }
     });
   }

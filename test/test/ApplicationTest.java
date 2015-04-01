@@ -9,14 +9,12 @@ import static play.test.Helpers.contentType;
 
 /**
 *
-* Simple (JUnit) tests that can call all parts of a play app.
-* If you are interested in mocking a whole application, see the wiki for more details.
-*
+* JUnit tests that exercise any part of the application.
 */
 public class ApplicationTest {
 
     /**
-     * A basic Junit test to validate JUnit functionality.
+     * Basic Junit test to validate JUnit functionality.
      */
     @Test
     public void simpleCheck() {
@@ -25,14 +23,12 @@ public class ApplicationTest {
     }
 
     /**
-     * Test basic Index page rendering.
+     * Ensure the Home page renders.
      */
     @Test
-    public void renderTemplate() {
-        //Content html = views.html.index.render("Your new application is ready.");
-        //assertThat(contentType(html)).isEqualTo("text/html");
-        //assertThat(contentAsString(html)).contains("Your new application is ready.");
+    public void renderHomePage() {
+        Content html = views.html.Home.render("Digits", "Home");
+        assertThat(contentType(html)).isEqualTo("text/html");
+        assertThat(contentAsString(html)).contains("Home Page");
     }
-
-
 }

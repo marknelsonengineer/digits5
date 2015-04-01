@@ -13,7 +13,9 @@ import views.html.Home;
  */
 public class Application extends Controller {
 
-  /** The name of the application. */
+  /**
+   * The name of the application.
+   */
   public static final String APPLICATION_NAME = "Digits";
 
   /**
