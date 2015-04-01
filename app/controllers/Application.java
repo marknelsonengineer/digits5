@@ -7,9 +7,12 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.formdata.ContactFormData;
+import views.formdata.PhoneType;
 import views.html.About;
 import views.html.Home;
 import views.html.NewContact;
+
+import java.util.Map;
 
 /**
  * The application's MVC Controller class.
@@ -50,17 +53,20 @@ public class Application extends Controller {
    */
   public static Result getNewContact(long id) {
     ContactFormData contactFormData = null;
+    Map<String, Boolean> phoneType = null;
 
     if (id != 0) {
       contactFormData = new ContactFormData(ContactsDb.getContact(id));
+      phoneType = PhoneType.getPhoneTypes(contactFormData.phoneType);
     }
     else {
       contactFormData = new ContactFormData();
+      phoneType = PhoneType.getPhoneTypes();
     }
 
     Form<ContactFormData> contactForm = Form.form(ContactFormData.class).fill(contactFormData);
 
-    return ok(NewContact.render(APPLICATION_NAME, "New Contact", contactForm));
+    return ok(NewContact.render(APPLICATION_NAME, "New Contact", contactForm, phoneType));
   }
 
   /**
@@ -88,11 +94,21 @@ public class Application extends Controller {
     Logger.debug("  firstName = [" + contactForm.field("firstName").value() + "]");
     Logger.debug("  lastName = [" + contactForm.field("lastName").value() + "]");
     Logger.debug("  phone = [" + contactForm.field("phone").value() + "]");
+    Logger.debug("  phoneType = [" + contactForm.field("phoneType").value() + "]");
 
     if (contactForm.hasErrors()) {
       Logger.error("Error in newContact page.");
       Logger.error(contactForm.errors().toString());
-      return badRequest(NewContact.render(APPLICATION_NAME, "New Contact", contactForm));
+
+      Map<String, Boolean> phoneType = null;
+      if (PhoneType.isType(contactForm.field("phoneType").value())) {
+        phoneType = PhoneType.getPhoneTypes(contactForm.field("phoneType").value());
+      }
+      else {
+        phoneType = PhoneType.getPhoneTypes();
+      }
+
+      return badRequest(NewContact.render(APPLICATION_NAME, "New Contact", contactForm, phoneType));
     }
 
     ContactFormData contactFormData = contactForm.get();
@@ -102,6 +118,7 @@ public class Application extends Controller {
     Logger.debug("  firstName = [" + contactFormData.firstName + "]");
     Logger.debug("  lastName = [" + contactFormData.lastName + "]");
     Logger.debug("  phone = [" + contactFormData.phone + "]");
+    Logger.debug("  phoneType = [" + contactFormData.phoneType + "]");
 
     Contact contact = ContactsDb.createContactFromForm(contactFormData);
 
@@ -110,6 +127,7 @@ public class Application extends Controller {
     Logger.debug("  firstName = [" + contact.getFirstName() + "]");
     Logger.debug("  lastName = [" + contact.getLastName() + "]");
     Logger.debug("  phone = [" + contact.getPhone() + "]");
+    Logger.debug("  phoneType = [" + contact.getPhoneType() + "]");
 
     return ok(Home.render(APPLICATION_NAME, "Home", ContactsDb.getContacts()));
   }
