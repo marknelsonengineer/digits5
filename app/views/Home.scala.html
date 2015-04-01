@@ -4,7 +4,7 @@
 * @author Mark Nelson
 * @see http://www.playframework.com
 *@
-@(title: String, pageName: String)
+@(title: String, pageName: String, contacts: List[Contact])
 
 @Main(title = title) {
 
@@ -16,15 +16,14 @@
     <tr>
       <th>First</th> <th>Last</th> <th>Phone</th>
     </tr>
-    <tr>
-      <td>Joe</td> <td>Schmoe</td> <td>+1 808 555 1212</td>
-    </tr>
-    <tr>
-      <td>Sam</td> <td>Nelson</td> <td>+1 222-222-2222</td>
-    </tr>
-    <tr>
-      <td>Mark</td> <td>Nelson</td> <td>+1 333 333 3333</td>
-    </tr>
+
+    @for(contact <- contacts) {
+      <tr>
+        <td>@contact.getFirstName</td>
+        <td>@contact.getLastName</td>
+        <td>@contact.getPhone</td>
+      </tr>
+    }
   </table>
 
 }
