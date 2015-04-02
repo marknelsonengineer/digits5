@@ -38,11 +38,15 @@ public class ContactFormData {
    */
   public String phone = "";
 
-
   /**
    * The contact's phone type.
    */
   public String phoneType = "";
+
+  /**
+   * A list of the contact's diet types.
+   */
+  public List<String> dietTypes = new ArrayList<String>();
 
   /**
    * The Play framework requires an empty constructor.
@@ -62,6 +66,7 @@ public class ContactFormData {
     this.lastName = contact.getLastName();
     this.phone = contact.getPhone();
     this.phoneType = contact.getPhoneType();
+    this.dietTypes = contact.getDietTypes();
   }
 
   /**
@@ -92,6 +97,11 @@ public class ContactFormData {
 
     if (phoneType == null || !PhoneType.isType(phoneType)) {
       errors.add(new ValidationError("phoneType", "A phone type is required."));
+    }
+
+    if (!DietTypes.areTypes(dietTypes)) {
+      errors.add(new ValidationError("dietType", "One of the diet types is invalid."));
+      // Future:  Show the first invalid diet type or the number of invalid diet types... and a list of valid types.
     }
 
     return errors.isEmpty() ? null : errors;

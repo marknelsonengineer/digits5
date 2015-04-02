@@ -108,4 +108,6 @@ public class IntegrationTest {
     });
   }
 
+  //Future Add a test that thoroughly exercises delete and the dietType field.
+
 }

@@ -32,7 +32,8 @@ public class ContactsDb {
           contactFormData.firstName,
           contactFormData.lastName,
           contactFormData.phone,
-          contactFormData.phoneType
+          contactFormData.phoneType,
+          contactFormData.dietTypes
       );
     }
     else {
@@ -41,7 +42,8 @@ public class ContactsDb {
           contactFormData.firstName,
           contactFormData.lastName,
           contactFormData.phone,
-          contactFormData.phoneType
+          contactFormData.phoneType,
+          contactFormData.dietTypes
       );
     }
 

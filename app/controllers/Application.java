@@ -7,6 +7,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.formdata.ContactFormData;
+import views.formdata.DietTypes;
 import views.formdata.PhoneType;
 import views.html.About;
 import views.html.Home;
@@ -54,19 +55,22 @@ public class Application extends Controller {
   public static Result getNewContact(long id) {
     ContactFormData contactFormData = null;
     Map<String, Boolean> phoneType = null;
+    Map<String, Boolean> dietTypes = null;
 
     if (id != 0) {
       contactFormData = new ContactFormData(ContactsDb.getContact(id));
       phoneType = PhoneType.getPhoneTypes(contactFormData.phoneType);
+      dietTypes = DietTypes.getDietTypes(contactFormData.dietTypes);
     }
     else {
       contactFormData = new ContactFormData();
       phoneType = PhoneType.getPhoneTypes();
+      dietTypes = DietTypes.getDietTypes();
     }
 
     Form<ContactFormData> contactForm = Form.form(ContactFormData.class).fill(contactFormData);
 
-    return ok(NewContact.render(APPLICATION_NAME, "New Contact", contactForm, phoneType));
+    return ok(NewContact.render(APPLICATION_NAME, "New Contact", contactForm, phoneType, dietTypes));
   }
 
   /**
@@ -108,7 +112,9 @@ public class Application extends Controller {
         phoneType = PhoneType.getPhoneTypes();
       }
 
-      return badRequest(NewContact.render(APPLICATION_NAME, "New Contact", contactForm, phoneType));
+      Map<String, Boolean> dietTypes = DietTypes.getDietTypes();
+
+      return badRequest(NewContact.render(APPLICATION_NAME, "New Contact", contactForm, phoneType, dietTypes));
     }
 
     ContactFormData contactFormData = contactForm.get();
