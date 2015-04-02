@@ -6,7 +6,7 @@
 *@
 @(title: String, pageName: String, contact: Form[views.formdata.ContactFormData], phoneType: Map[String, Boolean])
 
-@import bootstrap3.{select, text, phone}
+@import bootstrap3.{select, text, phone, hidden}
 @import helper.form
 
 @Main(title = title) {
@@ -17,10 +17,7 @@
     <h1>New Contact</h1>
 
     @form(routes.Application.postNewContact(), 'class -> "form-horizontal") {
-      <input type="hidden"
-      name="@contact("id").name"
-      id="@contact("id").id"
-      value="@contact("id").value">
+      @hidden(field = contact("id"))
 
       @text(field = contact("firstName"),
         label = "First",
