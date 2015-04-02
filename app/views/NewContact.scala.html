@@ -4,9 +4,9 @@
 * @author Mark Nelson
 * @see http://www.playframework.com
 *@
-@(title: String, pageName: String, contact: Form[views.formdata.ContactFormData], phoneType: Map[String, Boolean])
+@(title: String, pageName: String, contact: Form[views.formdata.ContactFormData], phoneType: Map[String, Boolean], dietMap: Map[String, Boolean])
 
-@import bootstrap3.{select, text, phone, hidden}
+@import bootstrap3.{checkboxes, hidden, phone, text}
 @import helper.form
 
 @Main(title = title) {
@@ -37,6 +37,10 @@
         optionMap = phoneType,
         isMultiple = false,
         help = "")
+
+      @checkboxes(contact("dietTypes"),
+        label = "Diet",
+        checkboxMap = dietMap)
 
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">

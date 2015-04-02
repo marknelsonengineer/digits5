@@ -17,7 +17,7 @@ public class NewContactPage extends FluentPage {
    * Create the NewContact Page.
    *
    * @param webDriver The driver.
-   * @param port The port.
+   * @param port      The port.
    */
   public NewContactPage(WebDriver webDriver, int port) {
     super(webDriver);
@@ -39,8 +39,8 @@ public class NewContactPage extends FluentPage {
    * Set passed values into the form, then submit it.
    *
    * @param firstName A contact's first name.
-   * @param lastName A contact's last name.
-   * @param phone A contact's phone number.
+   * @param lastName  A contact's last name.
+   * @param phone     A contact's phone number.
    * @param phoneType A contact's type of phone.
    */
   public void submitForm(String firstName, String lastName, String phone, String phoneType) {

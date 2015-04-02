@@ -19,6 +19,7 @@ public class Global extends GlobalSettings {
     cfd1.lastName = "Nelson";
     cfd1.phone = "+1 (808) 555-1111";
     cfd1.phoneType = "Mobile";
+    cfd1.dietTypes.add("Dairy");
     ContactsDb.createContactFromForm(cfd1);
 
     ContactFormData cfd2 = new ContactFormData();
@@ -26,6 +27,8 @@ public class Global extends GlobalSettings {
     cfd2.lastName = "Schmoe";
     cfd2.phone = "+1 (808) 555-2222";
     cfd2.phoneType = "Home";
+    cfd2.dietTypes.add("Fish");
+    cfd2.dietTypes.add("Beef");
     ContactsDb.createContactFromForm(cfd2);
 
     ContactFormData cfd3 = new ContactFormData();
@@ -33,6 +36,11 @@ public class Global extends GlobalSettings {
     cfd3.lastName = "Doe";
     cfd3.phone = "+1 (808) 555-3333";
     cfd3.phoneType = "Work";
+    cfd3.dietTypes.add("Dairy");
+    cfd3.dietTypes.add("Fish");
+    cfd3.dietTypes.add("Chicken");
+    cfd3.dietTypes.add("Beef");
+    cfd3.dietTypes.add("Gluten");
     ContactsDb.createContactFromForm(cfd3);
   }
 }

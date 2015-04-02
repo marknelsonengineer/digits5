@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 /**
  * Contains the information for one contact.
  *
@@ -12,6 +14,7 @@ public class Contact {
   private String lastName;
   private String phone;
   private String phoneType;
+  private List<String> dietTypes;
 
   /**
    * Create a new contact from parameterized values.
@@ -21,13 +24,15 @@ public class Contact {
    * @param lastName  The last name.
    * @param phone     The phone number.
    * @param phoneType The type of phone.
+   * @param dietTypes The types of diet.
    */
-  public Contact(long id, String firstName, String lastName, String phone, String phoneType) {
+  public Contact(long id, String firstName, String lastName, String phone, String phoneType, List<String> dietTypes) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.phone = phone;
     this.phoneType = phoneType;
+    this.dietTypes = dietTypes;
   }
 
   /**
@@ -73,5 +78,14 @@ public class Contact {
    */
   public String getPhoneType() {
     return phoneType;
+  }
+
+  /**
+   * Get the contact's type of diets.
+   *
+   * @return A list of the contact's diet types.
+   */
+  public List<String> getDietTypes() {
+    return dietTypes;
   }
 }
