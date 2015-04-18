@@ -33,7 +33,7 @@ public class Global extends GlobalSettings {
     cfd1.phone = "+1 (808) 555-1111";
     cfd1.phoneType = "Mobile";
     cfd1.dietTypes.add("Dairy");
-    Contact.createContactFromForm(cfd1);
+    Contact.init(cfd1);
 
     ContactFormData cfd2 = new ContactFormData();
     cfd2.firstName = "Joe";
@@ -42,7 +42,7 @@ public class Global extends GlobalSettings {
     cfd2.phoneType = "Home";
     cfd2.dietTypes.add("Fish");
     cfd2.dietTypes.add("Beef");
-    Contact.createContactFromForm(cfd2);
+    Contact.init(cfd2);
 
     ContactFormData cfd3 = new ContactFormData();
     cfd3.firstName = "Jane";
@@ -54,6 +54,6 @@ public class Global extends GlobalSettings {
     cfd3.dietTypes.add("Chicken");
     cfd3.dietTypes.add("Beef");
     cfd3.dietTypes.add("Gluten");
-    Contact.createContactFromForm(cfd3);
+    Contact.init(cfd3);
   }
 }

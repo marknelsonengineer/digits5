@@ -104,6 +104,23 @@ public class Contact extends play.db.ebean.Model {
     return contact;
   }
 
+  /**
+   * Initialize the database with data.  If the data is not present, then add it to the database.
+   *
+   * @param contactFormData A seed contact for the database.
+   */
+  public static void init(ContactFormData contactFormData) {
+    Contact contact = Contact.find().where()
+        .eq("firstName", contactFormData.firstName)
+        .eq("lastName", contactFormData.lastName)
+        .eq("phone", contactFormData.phone)
+        .findUnique();
+
+    if (contact == null) {
+      createContactFromForm(contactFormData);
+    }
+  }
+
 
   /**
    * List of all of the contacts in the application.
@@ -144,6 +161,8 @@ public class Contact extends play.db.ebean.Model {
       throw new ArrayIndexOutOfBoundsException("The contact id [" + id + "] does not exist in the database.");
     }
 
+    contact.getDietTypes().clear();
+    contact.save();
     contact.delete();
   }
 
