@@ -22,9 +22,9 @@
         <td>@contact.getFirstName</td>
         <td>@contact.getLastName</td>
         <td>@contact.getPhone</td>
-        <td>@contact.getPhoneType</td>
+        <td>@contact.getPhoneType.getPhoneType()</td>
         <td>@for(dietType <- contact.getDietTypes) {
-          @dietType
+          @dietType.getDietType()
         }</td>
         <td><a class="btn btn-xs btn-warning" href="@routes.Application.getNewContact(contact.getId)">Edit</a></td>
         <td><a class="btn btn-xs btn-danger" href="@routes.Application.deleteContact(contact.getId)">Delete</a></td>

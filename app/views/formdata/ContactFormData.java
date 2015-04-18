@@ -1,6 +1,7 @@
 package views.formdata;
 
 import models.Contact;
+import models.DietType;
 import play.data.validation.ValidationError;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class ContactFormData {
   }
 
   /**
-   * Populate a ContactFormData object from a Contact object from the model.
+   * Populate a ContactFormData object from a model Contact.
    *
    * @param contact A contact object from the model.
    */
@@ -65,8 +66,10 @@ public class ContactFormData {
     this.firstName = contact.getFirstName();
     this.lastName = contact.getLastName();
     this.phone = contact.getPhone();
-    this.phoneType = contact.getPhoneType();
-    this.dietTypes = contact.getDietTypes();
+    this.phoneType = contact.getPhoneType().getPhoneType();
+    for (DietType dietType : contact.getDietTypes()) {
+      this.dietTypes.add(dietType.getDietType());
+    }
   }
 
   /**
