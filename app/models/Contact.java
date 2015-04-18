@@ -13,8 +13,8 @@ public class Contact {
   private String firstName;
   private String lastName;
   private String phone;
-  private String phoneType;
-  private List<String> dietTypes;
+  private PhoneType phoneType;
+  private List<DietType> dietTypes;
 
   /**
    * Create a new contact from parameterized values.
@@ -26,7 +26,13 @@ public class Contact {
    * @param phoneType The type of phone.
    * @param dietTypes The types of diet.
    */
-  public Contact(long id, String firstName, String lastName, String phone, String phoneType, List<String> dietTypes) {
+  public Contact(
+      long id,
+      String firstName,
+      String lastName,
+      String phone,
+      PhoneType phoneType,
+      List<DietType> dietTypes) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -76,7 +82,7 @@ public class Contact {
    *
    * @return The contact's type of phone.
    */
-  public String getPhoneType() {
+  public PhoneType getPhoneType() {
     return phoneType;
   }
 
@@ -85,7 +91,7 @@ public class Contact {
    *
    * @return A list of the contact's diet types.
    */
-  public List<String> getDietTypes() {
+  public List<DietType> getDietTypes() {
     return dietTypes;
   }
 }

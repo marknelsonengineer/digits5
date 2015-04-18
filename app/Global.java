@@ -1,8 +1,11 @@
 import models.ContactsDb;
+import models.DietType;
+import models.PhoneType;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
 import views.formdata.ContactFormData;
+
 
 /**
  * The Global object for the Digits web application.
@@ -13,6 +16,17 @@ public class Global extends GlobalSettings {
   public void onStart(Application application) {
     super.onStart(application);
     Logger.info(controllers.Application.APPLICATION_NAME + " has started");
+
+    ContactsDb.addPhoneType(new PhoneType("Mobile"));
+    ContactsDb.addPhoneType(new PhoneType("Home"));
+    ContactsDb.addPhoneType(new PhoneType("Work"));
+
+    ContactsDb.addDietType(new DietType("Chicken"));
+    ContactsDb.addDietType(new DietType("Fish"));
+    ContactsDb.addDietType(new DietType("Beef"));
+    ContactsDb.addDietType(new DietType("Dairy"));
+    ContactsDb.addDietType(new DietType("Gluten"));
+
 
     ContactFormData cfd1 = new ContactFormData();
     cfd1.firstName = "Sam";
