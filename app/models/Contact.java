@@ -1,16 +1,18 @@
 package models;
 
+import views.formdata.ContactFormData;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Contains the information for one contact.
+ * Contains the information for one contact and persists it in a database.
  *
- * @author Mark Nelson
  * @see http://www.playframework.com
  */
 @Entity
@@ -24,17 +26,16 @@ public class Contact extends play.db.ebean.Model {
 
   private String phone;
 
-  @ManyToOne(cascade= CascadeType.PERSIST)
+  @ManyToOne(cascade = CascadeType.PERSIST)
   private PhoneType phoneType;
 
-  @ManyToMany(cascade=CascadeType.PERSIST)
+  @ManyToMany(cascade = CascadeType.PERSIST)
   private List<DietType> dietTypes;
 
 
   /**
    * Create a new contact from parameterized values.
    *
-   * @param id        A synthetic, unique ID number for the contact.
    * @param firstName The first name.
    * @param lastName  The last name.
    * @param phone     The phone number.
@@ -42,19 +43,18 @@ public class Contact extends play.db.ebean.Model {
    * @param dietTypes The types of diet.
    */
   public Contact(
-      long id,
       String firstName,
       String lastName,
       String phone,
       PhoneType phoneType,
       List<DietType> dietTypes) {
-    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.phone = phone;
     this.phoneType = phoneType;
     this.dietTypes = dietTypes;
   }
+
 
   /**
    * The EBean ORM finder method for database queries.
@@ -65,6 +65,89 @@ public class Contact extends play.db.ebean.Model {
     return new Finder<Long, Contact>(Long.class, Contact.class);
   }
 
+
+  /**
+   * Create a new contact object from ContactFormData, add it to the database and return the newly created contact.
+   *
+   * @param contactFormData The source of the data for the contact.
+   * @return A fully populated contact object that's just been persisted in the database.
+   */
+  public static Contact createContactFromForm(ContactFormData contactFormData) {
+    Contact contact = null;
+    PhoneType phoneType = PhoneType.getPhoneType(contactFormData.phoneType);
+    List<DietType> dietTypes = new ArrayList<DietType>();
+
+    for (String formDietType : contactFormData.dietTypes) {
+      dietTypes.add(DietType.getDietType(formDietType));
+    }
+
+    if (contactFormData.id == 0) {
+      contact = new Contact(
+          contactFormData.firstName,
+          contactFormData.lastName,
+          contactFormData.phone,
+          phoneType,
+          dietTypes
+      );
+    }
+    else {
+      contact = Contact.find().byId(contactFormData.id);
+
+      contact.setFirstName(contactFormData.firstName);
+      contact.setLastName(contactFormData.lastName);
+      contact.setPhone(contactFormData.phone);
+      contact.setPhoneType(phoneType);
+      contact.setDietTypes(dietTypes);
+    }
+
+    contact.save();
+    return contact;
+  }
+
+
+  /**
+   * List of all of the contacts in the application.
+   *
+   * @return A list of all of the contacts.
+   */
+  public static List<Contact> getContacts() {
+    return Contact.find().all();
+  }
+
+
+  /**
+   * Get a contact from the database.
+   *
+   * @param id The ID of the contact to get.
+   * @return A contact from the database.
+   */
+  public static Contact getContact(long id) {
+    Contact contact = Contact.find().byId(id);
+
+    if (contact == null) {
+      throw new ArrayIndexOutOfBoundsException("The contact id [" + id + "] does not exist in the database.");
+    }
+
+    return contact;
+  }
+
+
+  /**
+   * Delete a contact from the database.
+   *
+   * @param id A contact ID from the database to delete.
+   */
+  public static void deleteContact(long id) {
+    Contact contact = Contact.find().byId(id);
+
+    if (contact == null) {
+      throw new ArrayIndexOutOfBoundsException("The contact id [" + id + "] does not exist in the database.");
+    }
+
+    contact.delete();
+  }
+
+
   /**
    * Get the contact's id number.
    *
@@ -73,6 +156,7 @@ public class Contact extends play.db.ebean.Model {
   public long getId() {
     return id;
   }
+
 
   /**
    * Set the contact's ID number.
@@ -83,6 +167,7 @@ public class Contact extends play.db.ebean.Model {
     this.id = id;
   }
 
+
   /**
    * Get the contact's first name.
    *
@@ -91,6 +176,7 @@ public class Contact extends play.db.ebean.Model {
   public String getFirstName() {
     return firstName;
   }
+
 
   /**
    * Set the contact's first name.
@@ -101,6 +187,7 @@ public class Contact extends play.db.ebean.Model {
     this.firstName = firstName;
   }
 
+
   /**
    * Get the contact's last name.
    *
@@ -109,6 +196,7 @@ public class Contact extends play.db.ebean.Model {
   public String getLastName() {
     return lastName;
   }
+
 
   /**
    * Set the contact's last name.
@@ -119,6 +207,7 @@ public class Contact extends play.db.ebean.Model {
     this.lastName = lastName;
   }
 
+
   /**
    * Get the contact's phone number.
    *
@@ -127,6 +216,7 @@ public class Contact extends play.db.ebean.Model {
   public String getPhone() {
     return phone;
   }
+
 
   /**
    * Set the contact's phone number.
@@ -137,6 +227,7 @@ public class Contact extends play.db.ebean.Model {
     this.phone = phone;
   }
 
+
   /**
    * Get the contact's type of phone.
    *
@@ -145,6 +236,7 @@ public class Contact extends play.db.ebean.Model {
   public PhoneType getPhoneType() {
     return phoneType;
   }
+
 
   /**
    * Set the contact's type of phone.
@@ -155,6 +247,7 @@ public class Contact extends play.db.ebean.Model {
     this.phoneType = phoneType;
   }
 
+
   /**
    * Get the contact's type of diets.
    *
@@ -163,6 +256,7 @@ public class Contact extends play.db.ebean.Model {
   public List<DietType> getDietTypes() {
     return dietTypes;
   }
+
 
   /**
    * Set the contact's diet types.

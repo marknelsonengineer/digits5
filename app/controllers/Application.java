@@ -1,7 +1,6 @@
 package controllers;
 
 import models.Contact;
-import models.ContactsDb;
 import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
@@ -28,14 +27,16 @@ public class Application extends Controller {
    */
   public static final String APPLICATION_NAME = "Digits";
 
+
   /**
    * Render the Home page.
    *
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
   public static Result getHome() {
-    return ok(Home.render(APPLICATION_NAME, "Home", ContactsDb.getContacts()));
+    return ok(Home.render(APPLICATION_NAME, "Home", Contact.getContacts()));
   }
+
 
   /**
    * Render the About page.
@@ -45,6 +46,7 @@ public class Application extends Controller {
   public static Result getAbout() {
     return ok(About.render(APPLICATION_NAME, "About"));
   }
+
 
   /**
    * Render the New Contact page.
@@ -58,7 +60,7 @@ public class Application extends Controller {
     Map<String, Boolean> dietTypes = null;
 
     if (id != 0) {
-      contactFormData = new ContactFormData(ContactsDb.getContact(id));
+      contactFormData = new ContactFormData(Contact.getContact(id));
       phoneType = PhoneType.getPhoneTypes(contactFormData.phoneType);
       dietTypes = DietTypes.getDietTypes(contactFormData.dietTypes);
     }
@@ -73,6 +75,7 @@ public class Application extends Controller {
     return ok(NewContact.render(APPLICATION_NAME, "New Contact", contactForm, phoneType, dietTypes));
   }
 
+
   /**
    * Delete a contact and render the Home page.
    *
@@ -80,10 +83,11 @@ public class Application extends Controller {
    * @return An HTTP OK message along with the HTML content for the Home page.
    */
   public static Result deleteContact(long id) {
-    ContactsDb.deleteContact(id);
+    Contact.deleteContact(id);
 
-    return ok(Home.render(APPLICATION_NAME, "Home", ContactsDb.getContacts()));
+    return ok(Home.render(APPLICATION_NAME, "Home", Contact.getContacts()));
   }
+
 
   /**
    * Process an HTTP Post from the New Contact page.
@@ -126,7 +130,7 @@ public class Application extends Controller {
     Logger.debug("  phone = [" + contactFormData.phone + "]");
     Logger.debug("  phoneType = [" + contactFormData.phoneType + "]");
 
-    Contact contact = ContactsDb.createContactFromForm(contactFormData);
+    Contact contact = Contact.createContactFromForm(contactFormData);
 
     Logger.debug("Contact Data");
     Logger.debug("  id = [" + contact.getId() + "]");
@@ -135,6 +139,6 @@ public class Application extends Controller {
     Logger.debug("  phone = [" + contact.getPhone() + "]");
     Logger.debug("  phoneType = [" + contact.getPhoneType() + "]");
 
-    return ok(Home.render(APPLICATION_NAME, "Home", ContactsDb.getContacts()));
+    return ok(Home.render(APPLICATION_NAME, "Home", Contact.getContacts()));
   }
 }

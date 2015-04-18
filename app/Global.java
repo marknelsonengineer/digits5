@@ -1,4 +1,4 @@
-import models.ContactsDb;
+import models.Contact;
 import models.DietType;
 import models.PhoneType;
 import play.Application;
@@ -33,7 +33,7 @@ public class Global extends GlobalSettings {
     cfd1.phone = "+1 (808) 555-1111";
     cfd1.phoneType = "Mobile";
     cfd1.dietTypes.add("Dairy");
-    ContactsDb.createContactFromForm(cfd1);
+    Contact.createContactFromForm(cfd1);
 
     ContactFormData cfd2 = new ContactFormData();
     cfd2.firstName = "Joe";
@@ -42,7 +42,7 @@ public class Global extends GlobalSettings {
     cfd2.phoneType = "Home";
     cfd2.dietTypes.add("Fish");
     cfd2.dietTypes.add("Beef");
-    ContactsDb.createContactFromForm(cfd2);
+    Contact.createContactFromForm(cfd2);
 
     ContactFormData cfd3 = new ContactFormData();
     cfd3.firstName = "Jane";
@@ -54,6 +54,6 @@ public class Global extends GlobalSettings {
     cfd3.dietTypes.add("Chicken");
     cfd3.dietTypes.add("Beef");
     cfd3.dietTypes.add("Gluten");
-    ContactsDb.createContactFromForm(cfd3);
+    Contact.createContactFromForm(cfd3);
   }
 }

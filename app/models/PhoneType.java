@@ -4,8 +4,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
 import java.util.List;
+
+// TODO:  Remove all hardcoded PhoneTypes in the entire app.  Have them all be persisted in the database.
+// TODO:  Add an Order column.
 
 /**
  * A type of phone.
@@ -17,7 +19,7 @@ public class PhoneType extends play.db.ebean.Model {
 
   private String phoneType;
 
-  @OneToMany(mappedBy = "phoneType", cascade= CascadeType.PERSIST)
+  @OneToMany(mappedBy = "phoneType", cascade = CascadeType.PERSIST)
   private List<Contact> contacts;
 
 

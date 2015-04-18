@@ -1,8 +1,6 @@
 package tests;
 
-import models.ContactsDb;
 import org.junit.Test;
-import play.twirl.api.Content;
 import views.formdata.ContactFormData;
 import views.formdata.DietTypes;
 import views.formdata.PhoneType;
@@ -11,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static play.test.Helpers.contentAsString;
-import static play.test.Helpers.contentType;
 
 /**
  * JUnit tests that exercise any part of the application.
@@ -26,16 +22,6 @@ public class ApplicationTest {
   public void simpleCheck() {
     int a = 1 + 1;
     assertThat(a).isEqualTo(2);
-  }
-
-  /**
-   * Ensure the Home page renders.
-   */
-  @Test
-  public void renderHomePage() {
-    Content html = views.html.Home.render("Digits", "Home", ContactsDb.getContacts());
-    assertThat(contentType(html)).isEqualTo("text/html");
-    assertThat(contentAsString(html)).contains("Current Contacts");
   }
 
   /**

@@ -16,7 +16,7 @@ public class DietType extends play.db.ebean.Model {
 
   private String dietType;
 
-  @ManyToMany(mappedBy = "dietTypes", cascade= CascadeType.PERSIST)
+  @ManyToMany(mappedBy = "dietTypes", cascade = CascadeType.PERSIST)
   private List<Contact> contacts;
 
 
@@ -69,6 +69,7 @@ public class DietType extends play.db.ebean.Model {
     return new Finder<Long, DietType>(Long.class, DietType.class);
   }
 
+
   /**
    * Add a contact to the list of contacts that use this diet type.
    *
@@ -77,6 +78,7 @@ public class DietType extends play.db.ebean.Model {
   public void addContact(Contact contact) {
     contacts.add(contact);
   }
+
 
   /**
    * Get the contacts that use this DietType.
@@ -87,6 +89,7 @@ public class DietType extends play.db.ebean.Model {
     return contacts;
   }
 
+
   /**
    * Set the contacts that use this DietType.
    *
@@ -95,6 +98,7 @@ public class DietType extends play.db.ebean.Model {
   public void setContacts(List<Contact> contacts) {
     this.contacts = contacts;
   }
+
 
   /**
    * Get the diet type.
@@ -105,6 +109,7 @@ public class DietType extends play.db.ebean.Model {
     return dietType;
   }
 
+
   /**
    * Set the type of diet.
    *
@@ -114,6 +119,7 @@ public class DietType extends play.db.ebean.Model {
     this.dietType = dietType;
   }
 
+
   /**
    * Get the ID of the DietType.
    *
@@ -122,6 +128,7 @@ public class DietType extends play.db.ebean.Model {
   public long getId() {
     return id;
   }
+
 
   /**
    * Set the ID of the DietType.
