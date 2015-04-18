@@ -36,24 +36,28 @@ create sequence diet_type_seq;
 
 create sequence phone_type_seq;
 
-alter table contact add constraint fk_contact_phoneType_1 foreign key (phone_type_id) references phone_type (id);
+alter table contact add constraint fk_contact_phoneType_1 foreign key (phone_type_id) references phone_type (id) on delete restrict on update restrict;
 create index ix_contact_phoneType_1 on contact (phone_type_id);
 
 
 
-alter table contact_diet_type add constraint fk_contact_diet_type_contact_01 foreign key (contact_id) references contact (id);
+alter table contact_diet_type add constraint fk_contact_diet_type_contact_01 foreign key (contact_id) references contact (id) on delete restrict on update restrict;
 
-alter table contact_diet_type add constraint fk_contact_diet_type_diet_typ_02 foreign key (diet_type_id) references diet_type (id);
+alter table contact_diet_type add constraint fk_contact_diet_type_diet_typ_02 foreign key (diet_type_id) references diet_type (id) on delete restrict on update restrict;
 
 # --- !Downs
 
-drop table if exists contact cascade;
+SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists contact_diet_type cascade;
+drop table if exists contact;
 
-drop table if exists diet_type cascade;
+drop table if exists contact_diet_type;
 
-drop table if exists phone_type cascade;
+drop table if exists diet_type;
+
+drop table if exists phone_type;
+
+SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists contact_seq;
 

@@ -11,6 +11,8 @@ import java.util.List;
  */
 @Entity
 public class DietType extends play.db.ebean.Model {
+  private static final long serialVersionUID = 1L;
+
   @Id
   private long id;
 
