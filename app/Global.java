@@ -1,4 +1,4 @@
-import models.ContactsDb;
+import models.Contact;
 import models.DietType;
 import models.PhoneType;
 import play.Application;
@@ -17,16 +17,15 @@ public class Global extends GlobalSettings {
     super.onStart(application);
     Logger.info(controllers.Application.APPLICATION_NAME + " has started");
 
-    ContactsDb.addPhoneType(new PhoneType("Mobile"));
-    ContactsDb.addPhoneType(new PhoneType("Home"));
-    ContactsDb.addPhoneType(new PhoneType("Work"));
+    PhoneType.init("Mobile");
+    PhoneType.init("Home");
+    PhoneType.init("Work");
 
-    ContactsDb.addDietType(new DietType("Chicken"));
-    ContactsDb.addDietType(new DietType("Fish"));
-    ContactsDb.addDietType(new DietType("Beef"));
-    ContactsDb.addDietType(new DietType("Dairy"));
-    ContactsDb.addDietType(new DietType("Gluten"));
-
+    DietType.init("Chicken");
+    DietType.init("Fish");
+    DietType.init("Beef");
+    DietType.init("Dairy");
+    DietType.init("Gluten");
 
     ContactFormData cfd1 = new ContactFormData();
     cfd1.firstName = "Sam";
@@ -34,7 +33,7 @@ public class Global extends GlobalSettings {
     cfd1.phone = "+1 (808) 555-1111";
     cfd1.phoneType = "Mobile";
     cfd1.dietTypes.add("Dairy");
-    ContactsDb.createContactFromForm(cfd1);
+    Contact.init(cfd1);
 
     ContactFormData cfd2 = new ContactFormData();
     cfd2.firstName = "Joe";
@@ -43,7 +42,7 @@ public class Global extends GlobalSettings {
     cfd2.phoneType = "Home";
     cfd2.dietTypes.add("Fish");
     cfd2.dietTypes.add("Beef");
-    ContactsDb.createContactFromForm(cfd2);
+    Contact.init(cfd2);
 
     ContactFormData cfd3 = new ContactFormData();
     cfd3.firstName = "Jane";
@@ -55,6 +54,6 @@ public class Global extends GlobalSettings {
     cfd3.dietTypes.add("Chicken");
     cfd3.dietTypes.add("Beef");
     cfd3.dietTypes.add("Gluten");
-    ContactsDb.createContactFromForm(cfd3);
+    Contact.init(cfd3);
   }
 }
