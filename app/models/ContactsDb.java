@@ -27,11 +27,11 @@ public class ContactsDb {
    */
   public static Contact createContactFromForm(ContactFormData contactFormData) {
     Contact contact = null;
-    PhoneType phoneType = ContactsDb.getPhoneType(contactFormData.phoneType);
+    PhoneType phoneType = PhoneType.getPhoneType(contactFormData.phoneType);
     List<DietType> dietTypes = new ArrayList<DietType>();
 
     for (String formDietType : contactFormData.dietTypes) {
-      dietTypes.add(ContactsDb.getDietType(formDietType));
+      dietTypes.add(DietType.getDietType(formDietType));
     }
 
     if (contactFormData.id == 0) {
@@ -94,50 +94,6 @@ public class ContactsDb {
     }
 
     contacts.remove(id);
-  }
-
-  /**
-   * Add a DietType to the database.
-   *
-   * @param dietType The DietType to add.
-   */
-  public static void addDietType(DietType dietType) {
-    dietTypes.put(dietType.getDietType(), dietType);
-  }
-
-  /**
-   * Add a PhoneType to the database.
-   *
-   * @param phoneType The PhoneType to add.
-   */
-  public static void addPhoneType(PhoneType phoneType) {
-    phoneTypes.put(phoneType.getPhoneType(), phoneType);
-  }
-
-  /**
-   * Get a DietType object from the dietTypes database.
-   *
-   * @param dietType The type of diet to get.
-   * @return A DietType object.
-   */
-  public static DietType getDietType(String dietType) {
-    if (!dietTypes.containsKey(dietType)) {
-      throw new RuntimeException("Unable to find DietType [" + dietType + "]");
-    }
-    return dietTypes.get(dietType);
-  }
-
-  /**
-   * Get a PhoneType object from the phoneTypes database.
-   *
-   * @param phoneType The type of phone to get.
-   * @return A PhoneType object.
-   */
-  public static PhoneType getPhoneType(String phoneType) {
-    if (!phoneTypes.containsKey(phoneType)) {
-      throw new RuntimeException("Unable to find PhoneType [" + phoneType + "]");
-    }
-    return phoneTypes.get(phoneType);
   }
 
 }

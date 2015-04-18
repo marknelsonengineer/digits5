@@ -1,14 +1,24 @@
 package models;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.util.List;
 
 /**
  * The types of diets a Contact likes.
  */
-public class DietType {
+@Entity
+public class DietType extends play.db.ebean.Model {
+  @Id
   private long id;
+
   private String dietType;
+
+  @ManyToMany(mappedBy = "dietTypes", cascade= CascadeType.PERSIST)
   private List<Contact> contacts;
+
 
   /**
    * Construct a new instance of DietType.
@@ -17,6 +27,46 @@ public class DietType {
    */
   public DietType(String dietType) {
     this.dietType = dietType;
+  }
+
+
+  /**
+   * Get a DietType object from the dietTypes database.
+   *
+   * @param dietType The type of diet to get.
+   * @return A DietType object.
+   */
+  public static DietType getDietType(String dietType) {
+    return DietType.find().where().eq("dietType", dietType).findUnique();
+  }
+
+
+  /**
+   * Initialize a DietType value.  If the value exists, simply return it.  If it does not exist, then
+   * add it to the database.
+   *
+   * @param inDietType The DietType to initialize.
+   * @return A database-backed DietType object.
+   */
+  public static DietType init(String inDietType) {
+    DietType dietType = getDietType(inDietType);
+
+    if (dietType == null) {
+      dietType = new DietType(inDietType);
+      dietType.save();
+    }
+
+    return getDietType(inDietType);
+  }
+
+
+  /**
+   * The EBean ORM finder method for database queries.
+   *
+   * @return The finder method.
+   */
+  public static Finder<Long, DietType> find() {
+    return new Finder<Long, DietType>(Long.class, DietType.class);
   }
 
   /**
@@ -81,4 +131,5 @@ public class DietType {
   public void setId(long id) {
     this.id = id;
   }
+
 }

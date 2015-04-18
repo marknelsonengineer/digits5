@@ -1,23 +1,71 @@
 package models;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A type of phone.
  */
-public class PhoneType {
+@Entity
+public class PhoneType extends play.db.ebean.Model {
+  @Id
   private long id;
+
   private String phoneType;
+
+  @OneToMany(mappedBy = "phoneType", cascade= CascadeType.PERSIST)
   private List<Contact> contacts;
 
 
   /**
-   * Contstruct a new instance of PhoneType.
+   * Construct a new instance of PhoneType.
    *
    * @param phoneType The phone type.
    */
   public PhoneType(String phoneType) {
     this.phoneType = phoneType;
+  }
+
+  /**
+   * Initialize a PhoneType value.  If the value exists, simply return it.  If it does not exist, then
+   * add it to the database.
+   *
+   * @param inPhoneType The PhoneType to initialize.
+   * @return A database-backed PhoneType object.
+   */
+  public static PhoneType init(String inPhoneType) {
+    PhoneType phoneType = getPhoneType(inPhoneType);
+
+    if (phoneType == null) {
+      phoneType = new PhoneType(inPhoneType);
+      phoneType.save();
+    }
+
+    return getPhoneType(inPhoneType);
+  }
+
+  /**
+   * Get a PhoneType object from the phoneTypes database.
+   *
+   * @param phoneType The type of phone to get.
+   * @return A PhoneType object.
+   */
+  public static PhoneType getPhoneType(String phoneType) {
+    return PhoneType.find().where().eq("phoneType", phoneType).findUnique();
+  }
+
+
+  /**
+   * The EBean ORM finder method for database queries.
+   *
+   * @return The finder method.
+   */
+  public static Finder<Long, PhoneType> find() {
+    return new Finder<Long, PhoneType>(Long.class, PhoneType.class);
   }
 
   /**
@@ -82,4 +130,5 @@ public class PhoneType {
   public void setContacts(List<Contact> contacts) {
     this.contacts = contacts;
   }
+
 }
